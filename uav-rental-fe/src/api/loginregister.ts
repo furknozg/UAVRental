@@ -32,7 +32,7 @@ export async function loginUser(formdata: LoginFormData): Promise<LoginResponse>
 
 export async function registerUser(formData: RegisterFormData): Promise<void> {
   try {
-    await axios.post('/api/register', formData);
+    await axios.post('http://localhost:8000/api/register/', formData);
   } catch (error) {
     const axiosError = error as AxiosError;
     if (axiosError.response) {

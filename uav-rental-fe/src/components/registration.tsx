@@ -25,7 +25,7 @@ export const Registration: React.FC = () => {
         }
         try {
             await registerUser(formData); // API request to register user
-            navigate('/main'); // Redirect to main page after successful registration
+            navigate('/login'); // Redirect to main page after successful registration
         } catch (error) {
             console.error('Registration failed:', error);
             // Handle registration error
