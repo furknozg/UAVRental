@@ -9,10 +9,52 @@ Content-Type: application/Json
 POST http://127.0.0.1:8000/api/login/
 Content-Type: application/Json
 
-{"username": "john_do", "password": "password123"}
+{"username": "john_do", "password": "password13"}
 ###
 
 ###
 GET http://127.0.0.1:8000/api/test-token/
 Authorization: token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
 ###
+
+
+# Create a UAV (replace the token value with the actual token)
+POST http://localhost:8000/api/uavs/create/
+Content-Type: application/json
+Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+
+{
+
+    "brand": "SampleBrand",
+    "model": "SampleModel",
+    "weight": 50.5,
+    "category": "SampleCategory"
+
+}
+### 
+GET http://localhost:8000/api/uavs/user/
+Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+
+### Retrieve a UAV by ID (replace the token value with the actual token)
+GET http://localhost:8000/api/uavs/2/retrieve/
+Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+
+### List all UAVs (replace the token value with the actual token)
+GET http://localhost:8000/api/uavs/list/
+Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+
+### Update a UAV by ID (replace the token value with the actual token)
+PUT http://localhost:8000/api/uavs/1/update/
+Content-Type: application/json
+Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+
+{
+    "brand": "UpdatedBrand",
+    "model": "UpdatedModel",
+    "weight": 55.5,
+    "category": "UpdatedCategory"
+}
+
+### Delete a UAV by ID (replace the token value with the actual token)
+DELETE http://localhost:8000/api/uavs/1/delete/
+Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e

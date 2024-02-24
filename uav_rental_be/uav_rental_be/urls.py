@@ -25,4 +25,5 @@ urlpatterns = [
 urlpatterns = [
     # encapsulating the apis into different applications and add connecting them to server here
     path('api/', include('accounts.urls')),
+    path('api/', include('uavs.urls')),
 ]
