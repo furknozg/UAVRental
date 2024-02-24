@@ -1,0 +1,18 @@
+### Auth tests
+POST http://127.0.0.1:8000/api/register/
+Content-Type: application/Json
+
+{"username": "john_do", "password": "password123", "email": "johnd@example.com"}
+###
+
+###
+POST http://127.0.0.1:8000/api/login/
+Content-Type: application/Json
+
+{"username": "john_do", "password": "password123"}
+###
+
+###
+GET http://127.0.0.1:8000/api/test-token/
+Authorization: token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+###
