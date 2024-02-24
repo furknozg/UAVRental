@@ -17,6 +17,8 @@ class UserRegistration(generics.CreateAPIView):
     def post(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
+            # If the data is valid to the serializer create user,
+            # setting the password with the set_password function and save to db
             self.perform_create(serializer)
             user = CustomUser.objects.get(username=request.data['username'])
 
@@ -31,6 +33,7 @@ class UserRegistration(generics.CreateAPIView):
         serializer.save()
 
 class UserLogin(generics.CreateAPIView):
+    # Some orm parameters and serializers for unpacking the JSON request, permissions set to default
     queryset = CustomUser.objects.all()
     serializer_class = UserSerializer
     permission_classes = (permissions.AllowAny,)
@@ -40,6 +43,7 @@ class UserLogin(generics.CreateAPIView):
         password = request.data.get('password')
         user = authenticate(username=username, password=password)
         if user:
+            # Since registration does not create token, get_or_create is used here
             token, _ = Token.objects.get_or_create(user=user)
             return Response({'token': token.key})
         else:
@@ -52,6 +56,7 @@ from rest_framework.permissions import IsAuthenticated
 
 class CheckToken(APIView):
 
+    # Preset django macros for token based authentication confirmation, the macro does most of the work to verify user and can return data accordingly
     authentication_classes = [SessionAuthentication, TokenAuthentication]
     permission_classes = [IsAuthenticated]
 
