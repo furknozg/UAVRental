@@ -1,6 +1,8 @@
 import axios, { AxiosError } from "axios";
 
 
+export const api_host = 'localhost:8000';
+
 export interface LoginResponse {
   token: string;
 }
@@ -20,7 +22,7 @@ interface LoginFormData {
 
 export async function loginUser(formdata: LoginFormData): Promise<LoginResponse> {
   try {
-    const response = await axios.post('http://localhost:8000/api/login/', formdata);
+    const response = await axios.post('http://' + api_host + '/api/login/', formdata);
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -32,7 +34,7 @@ export async function loginUser(formdata: LoginFormData): Promise<LoginResponse>
 
 export async function registerUser(formData: RegisterFormData): Promise<void> {
   try {
-    await axios.post('http://localhost:8000/api/register/', formData);
+    await axios.post('http://' + api_host + '/api/register/', formData);
   } catch (error) {
     const axiosError = error as AxiosError;
     if (axiosError.response) {
