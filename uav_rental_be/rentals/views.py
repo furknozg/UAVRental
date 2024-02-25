@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework import status
 from .models import Rental
 from uavs.models import UAV
-from .serializers import RentalSerializer
+from .serializers import RentalSerializer,RentalCreateSerializer
 from uavs.serializers import UAVSerializer
 from django.core.exceptions import PermissionDenied
 # Create your views here.
@@ -32,7 +32,7 @@ class OwnerRentedUAVList(generics.ListAPIView):
 
 class RentalCreate(generics.CreateAPIView):
     queryset = Rental.objects.all()
-    serializer_class = RentalSerializer
+    serializer_class = RentalCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def create(self, request, *args, **kwargs):
@@ -44,7 +44,7 @@ class RentalCreate(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         # Check if the UAV associated with the rental is available
-
+        print(serializer.validated_data['uav'].id)
         uav_id = serializer.validated_data['uav'].id
         
         # Check if the UAV exists
