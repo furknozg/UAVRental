@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import Header from '../main/header';
-import { listUserRentals } from '../../api/rental';
+import Header from '../header';
+import { deleteRental, listUserRentals, updateRental } from '../../api/rental';
+import RentalDetailsPopup from './details';
 
 
 import Table from '@mui/material/Table';
@@ -10,11 +11,34 @@ import Paper from '@mui/material/Paper';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import Button from '@mui/material/Button';
 
 const MyRentals = () => {
     const token: string | null = localStorage.getItem("token");
     const [userRentals, setUserRentals] = useState([]);
 
+    const [openPopup, setOpenPopup] = useState(false); // State to control the visibility of the popup
+    const [rental, setRental] = useState({
+        id: null,
+        uav: null,
+        uav_name: null,
+        uav_owner: null,
+        start_date: null,
+        end_date: null,
+
+    }); // State to store UAV details
+
+    // Function to handle opening the popup and setting the selected UAV
+    const handleOpenPopup = (uavDetails: any) => {
+        setRental(uavDetails);
+        console.log(uavDetails.start_date);
+        setOpenPopup(true);
+    };
+
+    // Function to handle closing the popup
+    const handleClosePopup = () => {
+        setOpenPopup(false);
+    };
 
     useEffect(() => {
         fetchUserRentals(token); // Fetch available UAVs when the component mounts
@@ -23,44 +47,60 @@ const MyRentals = () => {
     const fetchUserRentals = async (token: string) => {
         try {
             const response = await listUserRentals(token);
-
-            const data = await response
-            setUserRentals(data); // Update state with the fetched UAVs
+            console.log(response);
+            setUserRentals(response); // Update state with the fetched UAVs
         } catch (error) {
             console.error('Error fetching available UAVs:', error);
         }
     };
+    const handleDeleteRequest = (id: number) => {
+        try {
+            deleteRental(token, id);
+        } catch (error) {
+            console.error(error);
 
+        }
+    }
+    const handleUpdateRequest = (id: number, startDate: string, endDate: string) => {
+        updateRental(token, id, startDate, endDate)
+    }
 
 
     return (
         <div>
             <Header></Header>
-            <h1>My Rentals UAVs</h1>
+            <h1>My UAV Rentals</h1>
 
             <TableContainer component={Paper}>
                 <Table>
                     <TableHead>
                         <TableRow>
                             <TableCell>Brand</TableCell>
-                            <TableCell>Model</TableCell>
-                            <TableCell>Weight</TableCell>
-                            <TableCell>Category</TableCell>
+                            <TableCell>Owner</TableCell>
+                            <TableCell>Start Date</TableCell>
+                            <TableCell>End Date</TableCell>
                             <TableCell></TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {userRentals.map((uav) => (
                             <TableRow key={uav.id}>
-                                <TableCell>{uav.brand}</TableCell>
-                                <TableCell>{uav.model}</TableCell>
-                                <TableCell>{uav.weight}</TableCell>
-                                <TableCell>{uav.category}</TableCell>
+                                <TableCell>{uav.uav_name}</TableCell>
+                                <TableCell>{uav.uav_owner}</TableCell>
+                                <TableCell>{uav.start_date}</TableCell>
+                                <TableCell>{uav.end_date}</TableCell>
+                                <TableCell>
+                                    <Button variant="text" onClick={() => handleOpenPopup(uav)}>
+                                        Details
+                                    </Button>
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
                 </Table>
             </TableContainer>
+            <RentalDetailsPopup open={openPopup} handleClose={handleClosePopup} rental={rental} onDelete={handleDeleteRequest} onUpdate={handleUpdateRequest} />
+
 
         </div>
     );
