@@ -53,12 +53,12 @@ class UAVDelete(generics.DestroyAPIView):
 
     def perform_destroy(self, serializer):
         instance = self.get_object()
-
+        print(instance)
         # Verify if the request sender is the owner of the UAV
         if instance.owner != self.request.user:
             raise PermissionDenied("You are not allowed to update this UAV.")
 
-        serializer.save()
+        instance.delete()
 
 class UserUAVList(generics.ListAPIView):
     serializer_class = UAVSerializer

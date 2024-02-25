@@ -37,8 +37,8 @@ GET http://localhost:8000/api/uavs/user/
 Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
 ### Retrieve a UAV by ID (replace the token value with the actual token)  Done
-GET http://localhost:8000/api/uavs/2/retrieve/
-Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+GET http://localhost:8000/api/uavs/8/retrieve/
+Authorization: Token f1cac8f547eb88d6503715dbff6e58c833ed65d3
 
 ### List available UAVs (replace the token value with the actual token) Done
 GET http://localhost:8000/api/uavs/list/
@@ -57,7 +57,7 @@ Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 }
 
 ### Delete a UAV by ID (replace the token value with the actual token) Done
-DELETE http://localhost:8000/api/uavs/1/delete/
+DELETE http://localhost:8000/api/uavs/2/delete/
 Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
 
@@ -67,7 +67,7 @@ Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 Content-Type: application/json
 
 {
-    "uav": 2,  
+    "id": 1,
     "start_date": "2024-03-01",
     "end_date": "2024-03-10"
 }
