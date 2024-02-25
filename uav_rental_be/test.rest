@@ -3,25 +3,26 @@ POST http://127.0.0.1:8000/api/register/
 Content-Type: application/Json
 
 {"username": "john_do", "password": "password123", "email": "johnd@example.com"}
-###
+### Done
 
 ###
 POST http://127.0.0.1:8000/api/login/
 Content-Type: application/Json
 
-{"username": "john_do", "password": "password13"}
-###
+{"username": "john_do", "password": "password123"}
+### Done
 
 ###
 GET http://127.0.0.1:8000/api/test-token/
-Authorization: token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
-###
+Authorization: token a74a03254eed0e55e158ac6660451f2d79109b79
+### Done
+
 
 
 # Create a UAV (replace the token value with the actual token)
 POST http://localhost:8000/api/uavs/create/
 Content-Type: application/json
-Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
 {
 
@@ -31,22 +32,22 @@ Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
     "category": "SampleCategory"
 
 }
-### 
+### Done
 GET http://localhost:8000/api/uavs/user/
-Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
-### Retrieve a UAV by ID (replace the token value with the actual token)
+### Retrieve a UAV by ID (replace the token value with the actual token)  Done
 GET http://localhost:8000/api/uavs/2/retrieve/
-Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
-### List all UAVs (replace the token value with the actual token)
+### List available UAVs (replace the token value with the actual token) Done
 GET http://localhost:8000/api/uavs/list/
-Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
-### Update a UAV by ID (replace the token value with the actual token)
-PUT http://localhost:8000/api/uavs/1/update/
+### Update a UAV by ID (replace the token value with the actual token) Done
+PUT http://localhost:8000/api/uavs/2/update/
 Content-Type: application/json
-Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
 
 {
     "brand": "UpdatedBrand",
@@ -55,6 +56,45 @@ Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
     "category": "UpdatedCategory"
 }
 
-### Delete a UAV by ID (replace the token value with the actual token)
+### Delete a UAV by ID (replace the token value with the actual token) Done
 DELETE http://localhost:8000/api/uavs/1/delete/
-Authorization: Token d1c36e6e6fdb30c7d30c2da870274b7ba820dc4e
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+
+
+### Create a rental (requires token authentication) Done 
+POST http://localhost:8000/api/rentals/
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+Content-Type: application/json
+
+{
+    "uav": 2,  
+    "start_date": "2024-03-01",
+    "end_date": "2024-03-10"
+}
+
+### Retrieve, update, and delete a specific rental (requires token authentication) Done
+GET http://localhost:8000/api/rentals/1/ 
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+
+###
+PUT http://localhost:8000/api/rentals/1/  # Replace 1 with the ID of the rental Done
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+Content-Type: application/json
+
+{
+    "uav": 2,  
+    "start_date": "2024-03-05",
+    "end_date": "2024-03-15"
+}
+
+### Done
+DELETE http://localhost:8000/api/rentals/4/ 
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+
+### List rentals associated with the authenticated user (requires token authentication) Done
+GET http://localhost:8000/api/rentals/user/
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
+
+### List rentals associated with the owner of the uav(requires token authentication) currently Done
+GET http://localhost:8000/api/rentals/owner/
+Authorization: Token a74a03254eed0e55e158ac6660451f2d79109b79
