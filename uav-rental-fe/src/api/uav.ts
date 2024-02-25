@@ -7,7 +7,7 @@ export async function createUAV(token: string, brand: string, model: string, wei
             brand,
             model,
             weight,
-            category
+            category,
         }, {
             headers: {
                 Authorization: `Token ${token}`,

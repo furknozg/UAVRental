@@ -36,10 +36,10 @@ export async function retrieveRental(token: string, id: number): Promise<JSON> {
 }
 
 // Function to update a rental by ID
-export async function updateRental(token: string, id: number, uavId: number, startDate: string, endDate: string): Promise<void> {
+export async function updateRental(token: string, id: number, startDate: string, endDate: string): Promise<void> {
     try {
         await axios.put(`http://${api_host}/api/rentals/${id}/`, {
-            uav: uavId,
+            uav: id,
             start_date: startDate,
             end_date: endDate
         }, {
