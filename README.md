@@ -35,8 +35,9 @@ NOTE
 - You can use ready-made templates.
 
 USAGE,
-  Back End,
-    Option 1: 
+  Back End:
+    
+Option 1: 
     
       docker-compose up 
   Option 2 (local configuration):
