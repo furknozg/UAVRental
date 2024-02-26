@@ -35,7 +35,7 @@ NOTE
 - You can use ready-made templates.
 
 USAGE,
-  Back End:
+  Back End (for testing there is also a test.rest file):
     
 Option 1: 
     
