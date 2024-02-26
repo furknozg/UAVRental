@@ -38,13 +38,17 @@ USAGE:
   Back End:
     Option 1: docker-compose up 
     Option 2 (local configuration):
+      
       run postgres initdb
+      
       specify a .env file in the root of the back-end that authenticates to configuration of your db:
-          DB_NAME=dbname
+          
+          {DB_NAME=dbname
           DB_USER=usr
           DB_PASSWORD=pass
           DB_HOST=localhost
-          DB_PORT=5432
+          DB_PORT=5432}
+          
       run python manage.py runserver
   Front End:
     npm install .
