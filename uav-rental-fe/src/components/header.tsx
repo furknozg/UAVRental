@@ -19,6 +19,9 @@ function Header() {
         <Button component={Link} to="/my-rentals" color="inherit">
           My Rentals
         </Button>
+        <Button component={Link} to="/my-renters" color="inherit">
+          My Renters
+        </Button>
       </Toolbar>
     </AppBar>
   );

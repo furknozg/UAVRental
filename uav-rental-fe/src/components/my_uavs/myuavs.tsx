@@ -14,10 +14,15 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 const MyUAVS = () => {
     const token: string | null = localStorage.getItem("token");
     const [myUAVs, setMyUAVs] = useState([]);
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [filteredUAVs, setFilteredUAVs] = useState([]);
+
 
     const [selectedUAV, setSelectedUAV] = useState({
         id: null,
@@ -30,6 +35,26 @@ const MyUAVS = () => {
     const [openPopup, setOpenPopup] = useState(false); // State to control the visibility of the popup
 
     const [openCreate, setOpenCreate] = useState(false);
+
+    useEffect(() => {
+        if (myUAVs.length === 0) return;
+
+        const filteredData = myUAVs.filter(uav => {
+            // Customize your filtering logic here based on the search term and uav properties
+            return uav.brand.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                uav.model.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                uav.weight.toString().includes(searchTerm.toLowerCase()) ||
+                uav.category.toLowerCase().includes(searchTerm.toLowerCase())
+
+            // Example: {"id":6,"brand":"a","model":"b","weight":1.0,"category":"2","is_available":false}
+            // uav.category.toLowerCase().includes(searchTerm.toLowerCase()); (if string)
+        });
+        setFilteredUAVs(filteredData);
+    }, [searchTerm, myUAVs]);
+
+    const handleSearch = (event: any) => {
+        setSearchTerm(event.target.value);
+    };
 
     const handleCreate = () => {
         setOpenCreate(true);
@@ -103,7 +128,19 @@ const MyUAVS = () => {
     return (
         <div>
             <Header></Header>
-            <h1>My UAVs</h1>
+            <div style={{ display: 'flex', alignItems: 'center' }}>
+                <h1 style={{ marginRight: '1rem' }}>My UAVs</h1>
+                <TextField
+                    label="Search"
+                    variant="outlined"
+                    value={searchTerm}
+                    onChange={handleSearch}
+                    size="small"
+                    style={{ marginRight: '1rem' }}
+                />
+                <Button variant="contained" onClick={handleCreate} size="medium">Create UAV</Button>
+
+            </div>
 
             <TableContainer component={Paper}>
 
@@ -116,12 +153,11 @@ const MyUAVS = () => {
                             <TableCell>Weight</TableCell>
                             <TableCell>Category</TableCell>
                             <TableCell></TableCell>
-                            <Button variant="contained" onClick={handleCreate}>Create UAV</Button>
                         </TableRow>
 
                     </TableHead>
                     <TableBody>
-                        {myUAVs.map((uav) => (
+                        {filteredUAVs.map((uav) => (
                             <TableRow key={uav.id}>
                                 <TableCell>{uav.brand}</TableCell>
                                 <TableCell>{uav.model}</TableCell>

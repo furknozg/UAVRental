@@ -6,6 +6,7 @@ import Main from './components/main/main.tsx';
 import { testToken } from './api/token.ts';
 import MyUAVS from './components/my_uavs/myuavs.tsx';
 import MyRentals from './components/my_rentals/myrentals.tsx';
+import MyRenters from './components/my_renters/myrenters.tsx';
 
 const AppRouter = () => {
   return (
@@ -16,6 +17,7 @@ const AppRouter = () => {
       <Route path="/main" element={<Main />} />
       <Route path="/my-uavs" element={<MyUAVS />} />
       <Route path="/my-rentals" element={<MyRentals />} />
+      <Route path="/my-renters" element={<MyRenters />}/>
 
 
     </Routes>

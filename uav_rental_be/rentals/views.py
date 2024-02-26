@@ -21,14 +21,17 @@ class UserRentalList(generics.ListAPIView):
         return Rental.objects.filter(renter=user_id)
         
 class OwnerRentedUAVList(generics.ListAPIView):
-    serializer_class = RentalSerializer
+    serializer_class = RentalCreateSerializer
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
         # Filter rentals based on the owner's ID
 
+
         user_id = self.request.user.id
-        return UAV.objects.filter(owner=user_id, is_available=False)
+        print(Rental.objects.filter(uav__owner=user_id, uav__is_available=False))
+        #This is queried
+        return Rental.objects.filter(uav__owner=user_id, uav__is_available=False)
 
 class RentalCreate(generics.CreateAPIView):
     queryset = Rental.objects.all()

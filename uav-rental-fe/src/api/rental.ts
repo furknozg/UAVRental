@@ -85,7 +85,7 @@ export async function listUserRentals(token: string): Promise<JSON[]> {
 }
 
 // Function to list rentals associated with the owner of the UAV
-export async function listOwnerRentals(token: string): Promise<JSON> {
+export async function listOwnerRentals(token: string): Promise<JSON[]> {
     try {
         const response = await axios.get(`http://${api_host}/api/rentals/owner/`, {
             headers: {
