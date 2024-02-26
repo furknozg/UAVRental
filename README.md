@@ -34,6 +34,21 @@ NOTE
 - There is no need to do a very detailed study on the front. A simple interface is sufficient.
 - You can use ready-made templates.
 
+USAGE:
+  Back End:
+    Option 1: docker-compose up 
+    Option 2 (local configuration):
+      run postgres initdb
+      specify a .env file in the root of the back-end that authenticates to configuration of your db:
+          DB_NAME=dbname
+          DB_USER=usr
+          DB_PASSWORD=pass
+          DB_HOST=localhost
+          DB_PORT=5432
+      run python manage.py runserver
+  Front End:
+    npm install .
+    npm run start 
 After completing your project and uploading it to GitHub, you need to save the project link as an answer in the field below. You can also upload project screenshots to your GitHub repo.
 
 Project duration is 3 days.
