@@ -1,0 +1,15 @@
+# Ignore Python bytecode files
+*.pyc
+
+# Ignore environment-specific settings files
+.env
+
+# Ignore database files
+*.sqlite3
+
+# Ignore development and temporary directories
+__pycache__
+*.egg-info
+*.egg
+dist
+build

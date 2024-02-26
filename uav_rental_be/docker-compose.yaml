@@ -1,0 +1,29 @@
+version: '3'
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: uav_rental
+      POSTGRES_USER: uname
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    environment:
+      - DB_NAME=uav_rental
+      - DB_USER=password
+      - DB_PASSWORD=uname
+      - DB_HOST=db
+      - DB_PORT=5432
+    depends_on:
+      - db
