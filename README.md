@@ -36,8 +36,10 @@ NOTE
 
 USAGE:
   Back End:
-    Option 1: docker-compose up 
-    Option 2 (local configuration):
+    Option 1: 
+    
+      docker-compose up 
+  Option 2 (local configuration):
       
       run postgres initdb
       
